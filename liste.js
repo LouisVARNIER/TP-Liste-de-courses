@@ -8,6 +8,7 @@ const button = document.getElementById("button");
 form.onsubmit = (event) => {
     event.preventDefault();
 
+
 switch (button.value) {
     case 'pomme':
         panier.push("pomme");
