@@ -35,3 +35,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     afficherListeFilms();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const planetsListElement = document.getElementById("planets-list");
+    const planetsDetailsElement = document.getElementById("planets-details");
+        // Fonction pour afficher la liste des planètes
+        function afficherListePlanets() {
+        fetch("https://swapi.dev/api/planets/")
+            .then((response) => response.json())
+            .then((data) => {
+            data.results.forEach((planet) => {
+                const li = document.createElement("li");
+                li.textContent = planet.name;
+                li.style.cursor = "pointer";
+                li.addEventListener("click", () => afficherDetailsPlanets(planet.url));
+                planetsListElement.appendChild(li);
+                });
+            })
+            .catch((error) => console.error("Erreur lors de la récupération des planètes :", error));
+        }
+
+        // Fonction pour afficher les détails d'un film sélectionné
+        function afficherDetailsPlanets(url) {
+            fetch(url)
+                .then((response) => response.json())
+                .then((planet) => {
+                planetsDetailsElement.innerHTML = `
+                <h2>${planet.name}</h2>
+                <p><strong>Période de rotation :</strong> ${planet.rotation_period}</p>
+                <p><strong>Période d'orbite :</strong> ${planet.orbital_period}</p>
+                <p><strong>Diamètre :</strong> ${planet.diameter}</p>
+                <p><strong>Climat :</strong> ${planet.climate}</p>
+                <p><strong>Gravité :</strong> ${planet.gravity}</p>                
+                <p><strong>Terrain :</strong> ${planet.terrain}</p>               
+                <p><strong>Surface d'eau :</strong> ${planet.surface_water}</p>                
+                <p><strong>Population :</strong> ${planet.population}</p>                
+                `;
+                })
+            .catch((error) => console.error("Erreur lors de la récupération des détails du film :", error));
+            }
+    
+        afficherListePlanets();
+
+});
