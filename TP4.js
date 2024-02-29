@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch((error) => console.error("Erreur lors de la récupération des planètes :", error));
         }
 
-        // Fonction pour afficher les détails d'un film sélectionné
+        // Fonction pour afficher les détails d'une planète sélectionnée
         function afficherDetailsPlanets(url) {
             fetch(url)
                 .then((response) => response.json())
